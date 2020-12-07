@@ -1,0 +1,62 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "./app/theme.scss";
+$primary: map-get($theme, primary);
+$accent: map-get($theme, accent);
+.primary {
+  background: mat-color($primary);
+  color: white;
+}
+
+.accent {
+  background: mat-color($accent);
+  color: white;
+}
+
+.secondary {
+  background: #5e92f3;
+  color: white;
+}
+
+.activeSecondary {
+  background: #9dbaf0;
+  color: white;
+}
+
+button:focus {
+  outline: none;
+}
+
+a,
+a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.mat-icon {
+  vertical-align: middle;
+}
+
+table {
+  width: 100%;
+  overflow: auto;
+  display: block;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+thead, tbody tr td{
+  white-space: nowrap;
+}
+
+.mat-cell{
+padding-right: 15px !important;
+width: 25%;
+}
+
+.mat-header-cell{
+  padding-right: 15px !important;
+  width: 25%;
+}

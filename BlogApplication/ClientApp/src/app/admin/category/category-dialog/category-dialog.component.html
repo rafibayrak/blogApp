@@ -1,0 +1,15 @@
+<h3>Category Create </h3>
+<form [formGroup]="categoryForm">
+  <mat-form-field>
+    <mat-label>Category Name</mat-label>
+    <input formControlName="name" matInput placeholder="Category Name">
+  </mat-form-field>
+</form>
+<div class="d-flex flex-row bd-highlight justify-content-end">
+  <div class="pr-2 bd-highlight">
+    <button color='accent' mat-raised-button (click)="onClick()">Ok</button>
+  </div>
+  <div class="bd-highlight">
+    <button mat-raised-button (click)="onClose()">Close</button>
+  </div>
+</div>

@@ -1,0 +1,55 @@
+<div class="d-flex bd-highlight primary">
+  <div class="p-2 flex-grow-1 bd-highlight primary">
+    <div class="d-flex flex-row">
+      <button type="button" color="accent" mat-raised-button (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <h3 class="ml-2">Administrator</h3>
+    </div>
+
+  </div>
+  <div class="p-2 bd-highlight">Flex item</div>
+  <div class="p-2 bd-highlight">Third flex item</div>
+</div>
+
+<mat-drawer-container style="min-height: 94vh;">
+  <mat-drawer #drawer style="width: 200px;" class="accent" mode="side" opened>
+    <a class="secondary w-100 p-1 mt-1" routerLink="/admin" routerLinkActive="activeSecondary"
+      [routerLinkActiveOptions]="{exact: true}" mat-button>
+      <div class="d-flex flex-row bd-highlight">
+        <div class="ml-4 bd-highlight">
+          <mat-icon class="mr-2">dashboard</mat-icon>
+        </div>
+        <div class="bd-highlight">Dashboard</div>
+      </div>
+    </a>
+    <a class="secondary w-100 p-1 mt-1" routerLink="category" routerLinkActive="activeSecondary" mat-button>
+      <div class="d-flex flex-row bd-highlight">
+        <div class="ml-4 bd-highlight">
+          <mat-icon class="mr-2">category</mat-icon>
+        </div>
+        <div class="bd-highlight">Categories</div>
+      </div>
+    </a>
+    <a class="secondary w-100 p-1 mt-1" routerLink="blog" routerLinkActive="activeSecondary" mat-button>
+      <div class="d-flex flex-row bd-highlight">
+        <div class="ml-4 bd-highlight">
+          <mat-icon class="mr-2">article</mat-icon>
+        </div>
+        <div class="bd-highlight">Blogs</div>
+      </div>
+    </a>
+    <a class="secondary w-100 p-1 mt-1" routerLink="user" routerLinkActive="activeSecondary" mat-button>
+      <div class="d-flex flex-row bd-highlight">
+        <div class="ml-4 bd-highlight">
+          <mat-icon class="mr-2">groups</mat-icon>
+        </div>
+        <div class="bd-highlight">Users</div>
+      </div>
+    </a>
+  </mat-drawer>
+
+  <div class="m-2">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>

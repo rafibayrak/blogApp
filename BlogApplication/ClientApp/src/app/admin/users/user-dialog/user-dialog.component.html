@@ -1,0 +1,35 @@
+<h3>User Create </h3>
+<form [formGroup]="userForm">
+  <mat-form-field>
+    <mat-label>User Name</mat-label>
+    <input formControlName="userName" matInput placeholder="User Name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input formControlName="password" matInput placeholder="Password">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input formControlName="name" matInput placeholder="Name">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input formControlName="email" matInput placeholder="Email">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>User Role</mat-label>
+    <mat-select formControlName="userRole">
+      <mat-option *ngFor="let role of getUserRoles()" [value]="role">
+        {{role|userRolesPipe}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<div class="d-flex flex-row bd-highlight justify-content-end">
+  <div class="pr-2 bd-highlight">
+    <button color='accent' mat-raised-button (click)="onClick()">Ok</button>
+  </div>
+  <div class="bd-highlight">
+    <button mat-raised-button (click)="onClose()">Close</button>
+  </div>
+</div>
