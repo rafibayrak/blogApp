@@ -28,5 +28,6 @@ namespace BlogApplication.Core.Models
         public ICollection<BlogPost> BlogPosts { get; set; }
         public ICollection<Category> Categories { get; set; }
         public ICollection<Comment> Comments { get; set; }
+        public ICollection<ImageFolder> ImageFolders { get; set; }
     }
 }

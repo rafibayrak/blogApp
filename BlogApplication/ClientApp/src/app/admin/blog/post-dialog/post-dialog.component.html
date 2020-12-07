@@ -1,14 +1,12 @@
 <form [formGroup]="postForm">
-  <mat-form-field>
+  <mat-form-field *ngIf="selectedCategories.length !== 0">
     <mat-chip-list #chipList>
-      <mat-chip *ngFor="let category of selectedCategories" [selectable]="selectable"
-               [removable]="removable" (removed)="remove(category)">
+      <mat-chip *ngFor="let category of selectedCategories" [selectable]="selectable" [removable]="removable"
+        (removed)="remove(category)">
         {{category.name}}
         <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
       </mat-chip>
-      <input placeholder="Selected Categories"
-             [matChipInputFor]="chipList"
-             [matChipInputAddOnBlur]="addOnBlur">
+      <input placeholder="Selected Categories" [matChipInputFor]="chipList" [matChipInputAddOnBlur]="addOnBlur">
     </mat-chip-list>
   </mat-form-field>
 
@@ -25,13 +23,8 @@
     <mat-label>Title</mat-label>
     <input formControlName="title" matInput placeholder="Title">
   </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Content</mat-label>
-    <input formControlName="content" matInput placeholder="content">
-  </mat-form-field>
-
 </form>
+<ckeditor [(ngModel)]="editorData"></ckeditor>
 <div class="d-flex flex-row bd-highlight justify-content-end">
   <div class="pr-2 bd-highlight">
     <button color='accent' mat-raised-button (click)="onClick()">Ok</button>

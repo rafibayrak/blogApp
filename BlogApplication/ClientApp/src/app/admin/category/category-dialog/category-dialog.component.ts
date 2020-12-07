@@ -17,7 +17,12 @@ export class CategoryDialogComponent implements OnInit {
   constructor(
     private _dialogRef: MatDialogRef<CategoryDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any
-  ) { }
+  ) {
+    if (_data) {
+      this.category = _data;
+      this.categoryForm.get('name').setValue(this.category.name);
+    }
+  }
 
   ngOnInit(): void {
   }

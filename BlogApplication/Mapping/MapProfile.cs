@@ -14,7 +14,7 @@ namespace BlogApplication.Mapping
             CreateMap<CategoryDto, Category>()
                 .ForMember(x => x.Id, o => o.MapFrom(src => src.Id == Guid.Empty ? Guid.NewGuid() : src.Id))
                 .ForMember(x => x.CreationTime, o => o.MapFrom(src => src.CreationTime == DateTime.MinValue ? DateTime.UtcNow : src.CreationTime))
-                .ForMember(x => x.ModificationTime, o => o.MapFrom(src => src.ModificationTime == DateTime.MinValue ? DateTime.UtcNow : src.ModificationTime));
+                .ForMember(x => x.ModificationTime, o => o.MapFrom(src => DateTime.UtcNow));
 
             CreateMap<User, UserDto>();
 
@@ -22,14 +22,13 @@ namespace BlogApplication.Mapping
             CreateMap<UserCreateDto, User>()
                 .ForMember(x => x.Id, o => o.MapFrom(src => src.Id == Guid.Empty ? Guid.NewGuid() : src.Id))
                 .ForMember(x => x.CreationTime, o => o.MapFrom(src => src.CreationTime == DateTime.MinValue ? DateTime.UtcNow : src.CreationTime))
-                .ForMember(x => x.ModificationTime, o => o.MapFrom(src => src.ModificationTime == DateTime.MinValue ? DateTime.UtcNow : src.ModificationTime));
+                .ForMember(x => x.ModificationTime, o => o.MapFrom(src => DateTime.UtcNow));
 
             CreateMap<BlogPost, BlogPostCreateDto>();
             CreateMap<BlogPostCreateDto, BlogPost>().ForMember(x => x.Id, o => o.MapFrom(src => src.Id == Guid.Empty ? Guid.NewGuid() : src.Id))
                 .ForMember(x => x.CreationTime, o => o.MapFrom(src => src.CreationTime == DateTime.MinValue ? DateTime.UtcNow : src.CreationTime))
-                .ForMember(x => x.ModificationTime, o => o.MapFrom(src => src.ModificationTime == DateTime.MinValue ? DateTime.UtcNow : src.ModificationTime));
+                .ForMember(x => x.ModificationTime, o => o.MapFrom(src => DateTime.UtcNow));
             CreateMap<BlogPost, BlogPostDto>();
-            ;
         }
     }
 }
