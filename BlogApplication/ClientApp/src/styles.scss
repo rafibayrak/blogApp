@@ -36,10 +36,38 @@ a:hover {
   vertical-align: middle;
 }
 
+// table {
+//   width: 100%;
+//   overflow: auto;
+//   display: block;
+// }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+// thead, tbody tr td{
+//   white-space: nowrap;
+// }
+
+// .mat-cell{
+// padding-right: 15px !important;
+// width: 25%;
+// }
+
+// .mat-header-cell{
+//   padding-right: 15px !important;
+//   width: 25%;
+// }
+
 table {
   width: 100%;
-  overflow: auto;
+  table-layout: fixed;
   display: block;
+  overflow: auto;
+  padding-right: 1rem !important;
+  padding-left: 1rem !important;
 }
 
 .mat-form-field {
@@ -47,16 +75,33 @@ table {
   width: 100%;
 }
 
-thead, tbody tr td{
-  white-space: nowrap;
+td,
+th {
+  width: 1%;
 }
 
-.mat-cell{
-padding-right: 15px !important;
-width: 25%;
+th {
+  text-align: center;
 }
 
-.mat-header-cell{
-  padding-right: 15px !important;
-  width: 25%;
+td {
+  text-align: center;
+  word-wrap: break-word;
+}
+
+table tbody tr td {
+  padding-right: 10px !important;
+  padding-left: 10px !important;
+}
+
+::ng-deep .mat-paginator {
+  width: 100%;
+}
+
+.mat-header-cell {
+  padding: 0px !important;
+}
+
+.mat-sort-header-container {
+  justify-content: center;
 }

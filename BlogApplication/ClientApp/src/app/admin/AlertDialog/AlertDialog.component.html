@@ -1,0 +1,10 @@
+<h2>{{alertDialog.title}}</h2>
+<p>{{alertDialog.content}}</p>
+<div class="d-flex flex-row bd-highlight justify-content-end">
+  <div class="pr-2 bd-highlight" *ngIf="alertDialog.isShowOkButton">
+    <button color='accent' mat-raised-button (click)="onClick()">Ok</button>
+  </div>
+  <div class="bd-highlight">
+    <button mat-raised-button (click)="onClose()">Close</button>
+  </div>
+</div>

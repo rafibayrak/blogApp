@@ -1,8 +1,10 @@
+import { AlertDialog } from './alert.dialog';
 import { BlogPost } from './blogPost';
 import { BlogPostCreate } from './blogPost.create';
 import { Category } from './category';
 import { DataTable } from './dataTable';
 import { Login } from './login';
+import { User } from './user';
 import { UserCreate } from './user.create';
 import { UserRole } from './UserRole';
 
@@ -13,5 +15,7 @@ export {
   UserRole,
   UserCreate,
   BlogPostCreate,
-  BlogPost
+  BlogPost,
+  AlertDialog,
+  User
 }

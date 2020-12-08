@@ -50,16 +50,44 @@ namespace BlogApplication.Controllers
             return NoContent();
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(UserCreateDto userDto)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(Guid id, UserCreateDto userDto)
         {
+            if (id != userDto.Id)
+            {
+                return BadRequest();
+            }
+
             if (userDto == null)
             {
                 return BadRequest();
             }
 
+            var existUser = await _service.GetByIdAsync<User>(id);
             var user = _mapper.Map<User>(userDto);
+            if (string.IsNullOrEmpty(user.Password.Trim()))
+            {
+                user.Password = existUser.Password;
+            }
+            else
+            {
+                user.Password = PasswordHelper.GetHashString(user.Password);
+            }
+
             _service.Update(user);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Remove(Guid id)
+        {
+            var user = await _service.GetByIdAsync<User>(id);
+            if (user == null)
+            {
+                return BadRequest();
+            }
+
+            _service.Remove(user);
             return NoContent();
         }
     }

@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import { AlertDialogComponent } from './../AlertDialog/AlertDialog.component';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { DataTableViewAdapter } from 'src/app/helpers/DataTableViewAdapter';
+import { AlertDialog, Category } from 'src/app/models';
 import { DataTable } from 'src/app/models/dataTable';
 import { CategoryDialogComponent } from './category-dialog/category-dialog.component';
 import { CategoryService } from './category.service';
@@ -12,13 +14,14 @@ import { CategoryService } from './category.service';
 })
 export class CategoryComponent extends DataTableViewAdapter implements OnInit {
   dataTable = new DataTable();
+  categories = new Array<Category>();
 
   constructor(
     private _categoryService: CategoryService,
     private _dialog: MatDialog
   ) {
     super();
-    this.dataTable.displayedColumns = ['name', 'operation'];
+    this.dataTable.displayedColumns = ['creationTime', 'modificationTime', 'name', 'operation'];
   }
 
   ngOnInit() {
@@ -28,14 +31,16 @@ export class CategoryComponent extends DataTableViewAdapter implements OnInit {
   responseResult(whoseRequest: any) {
     switch (whoseRequest) {
       case 'getCategories':
+        this.categories = this.getResponseData().source;
         this.dataTable.lenght = this.getResponseData().filterRows;
         this.dataTable.dataSource = this.getResponseData().source;
         break;
-      case 'createCategory':
+      case 'CRUDCategory':
         this.getServerData();
         break;
     }
   }
+
   responseError(whoseRequest: any) {
     throw new Error('Method not implemented.');
   }
@@ -50,7 +55,45 @@ export class CategoryComponent extends DataTableViewAdapter implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.serverRequest(this._categoryService.saveCategory(result), 'createCategory');
+      if (result) {
+        this.serverRequest(this._categoryService.saveCategory(result), 'CRUDCategory');
+      }
     });
+  }
+
+  onEditCategory(id: string) {
+    const category = this.categories.find(x => x.id === id);
+    if (category) {
+      const dialogRef = this._dialog.open(CategoryDialogComponent, {
+        panelClass: 'col-md-6',
+        data: category
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.serverRequest(this._categoryService.updateCategory(result), 'CRUDCategory');
+        }
+      });
+    }
+  }
+
+  onRemoveCategory(id: string) {
+    const category = this.categories.find(x => x.id === id);
+    if (category) {
+      const alertDialog = new AlertDialog();
+      alertDialog.title = 'Silme';
+      alertDialog.content = 'Silmek istediğinize emin misiniz?';
+      alertDialog.isShowOkButton = true;
+      const dialogRef = this._dialog.open(AlertDialogComponent, {
+        panelClass: 'col-md-6',
+        data: alertDialog
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.serverRequest(this._categoryService.removeCategory(id), 'CRUDCategory');
+        }
+      });
+    }
   }
 }

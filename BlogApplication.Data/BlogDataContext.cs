@@ -17,5 +17,7 @@ namespace BlogApplication.Data
         public DbSet<BlogPost> BlogPosts { get; set; }
         public DbSet<CategoryPostItem> CategoryPostItems { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<ImageFolder> ImageFolders { get; set; }
     }
 }

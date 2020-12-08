@@ -26,4 +26,12 @@ export class CategoryService extends ControllerService {
   saveCategory(category: Category) {
     return this.post('', category, null);
   }
+
+  updateCategory(category: Category) {
+    return this.put(`/${category.id}`, category);
+  }
+
+  removeCategory(categoryId: string) {
+    return this.delete(`/${categoryId}`);
+  }
 }

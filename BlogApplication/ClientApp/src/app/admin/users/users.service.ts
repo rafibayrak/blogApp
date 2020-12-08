@@ -1,7 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ControllerService } from '../../services/controller.service';
 import { Injectable } from '@angular/core';
-import { DataTable } from 'src/app/models';
+import { DataTable, User } from 'src/app/models';
 import { UserCreate } from 'src/app/models/';
 
 @Injectable()
@@ -23,5 +23,13 @@ export class UserService extends ControllerService {
 
   saveUser(user: UserCreate) {
     return this.post('', user, null);
+  }
+
+  updateUser(user: User) {
+    return this.put(`/${user.id}`, user);
+  }
+
+  removeUser(userId: string) {
+    return this.delete(`/${userId}`);
   }
 }

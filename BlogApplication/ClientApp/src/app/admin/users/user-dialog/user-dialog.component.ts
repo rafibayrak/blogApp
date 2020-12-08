@@ -21,7 +21,15 @@ export class UserDialogComponent implements OnInit {
   constructor(
     private _dialogRef: MatDialogRef<UserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any
-  ) { }
+  ) {
+    if (_data) {
+      this.user = _data;
+      this.userForm.get('name').setValue(this.user.name);
+      this.userForm.get('userName').setValue(this.user.userName);
+      this.userForm.get('email').setValue(this.user.email);
+      this.userForm.get('userRole').setValue(this.user.userRole);
+    }
+  }
 
   ngOnInit(): void {
   }

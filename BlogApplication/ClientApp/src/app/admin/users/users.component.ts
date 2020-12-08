@@ -1,9 +1,10 @@
 import { UserService } from './users.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableViewAdapter } from 'src/app/helpers/DataTableViewAdapter';
-import { DataTable } from 'src/app/models';
+import { AlertDialog, DataTable, User } from 'src/app/models';
 import { MatDialog } from '@angular/material';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { AlertDialogComponent } from '../AlertDialog/AlertDialog.component';
 
 @Component({
   selector: 'app-users',
@@ -12,6 +13,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 })
 export class UsersComponent extends DataTableViewAdapter implements OnInit {
   dataTable = new DataTable();
+  users = new Array<User>();
 
   constructor(
     private _userService: UserService,
@@ -28,10 +30,11 @@ export class UsersComponent extends DataTableViewAdapter implements OnInit {
   responseResult(whoseRequest: any) {
     switch (whoseRequest) {
       case 'getAll':
+        this.users = this.getResponseData().source;
         this.dataTable.lenght = this.getResponseData().filterRows;
         this.dataTable.dataSource = this.getResponseData().source;
         break;
-      case 'createUser':
+      case 'CRUDUser':
         this.getServerData();
         break;
     }
@@ -51,7 +54,42 @@ export class UsersComponent extends DataTableViewAdapter implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.serverRequest(this._userService.saveUser(result), 'createUser');
+      if (result) {
+        this.serverRequest(this._userService.saveUser(result), 'CRUDUser');
+      }
+    });
+  }
+
+  onEditUser(id: string) {
+    const user = this.users.find(x => x.id === id);
+    if (user) {
+      const dialogRef = this._dialog.open(UserDialogComponent, {
+        panelClass: 'col-md-6',
+        data: user
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          this.serverRequest(this._userService.updateUser(result), 'CRUDUser');
+        }
+      });
+    }
+  }
+
+  onRemoveUser(id: string) {
+    const alertDialog = new AlertDialog();
+    alertDialog.title = 'Silme';
+    alertDialog.content = 'Silmek istediğinize emin misiniz?';
+    alertDialog.isShowOkButton = true;
+    const dialogRef = this._dialog.open(AlertDialogComponent, {
+      panelClass: 'col-md-6',
+      data: alertDialog
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.serverRequest(this._userService.removeUser(id), 'CRUDUser');
+      }
     });
   }
 }

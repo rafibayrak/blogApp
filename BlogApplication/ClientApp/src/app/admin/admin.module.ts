@@ -20,6 +20,8 @@ import { PipeModule } from '../pipes/pipe.module';
 import { PostDialogComponent } from './blog/post-dialog/post-dialog.component';
 import { BlogPostService } from './blog/blog.service';
 import {MatChipsModule} from '@angular/material/chips';
+import { AlertDialogComponent } from './AlertDialog/AlertDialog.component';
+import { CKEditorModule } from 'ckeditor4-angular';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,8 @@ import {MatChipsModule} from '@angular/material/chips';
     CategoryDialogComponent,
     UserDialogComponent,
     UsersComponent,
-    PostDialogComponent
+    PostDialogComponent,
+    AlertDialogComponent
   ],
   imports: [
     CommonModule,
@@ -48,7 +51,8 @@ import {MatChipsModule} from '@angular/material/chips';
     ReactiveFormsModule,
     MatSelectModule,
     PipeModule,
-    MatChipsModule
+    MatChipsModule,
+    CKEditorModule
   ],
   providers: [
     CategoryService,
