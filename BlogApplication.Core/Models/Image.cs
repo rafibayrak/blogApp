@@ -10,5 +10,7 @@ namespace BlogApplication.Core.Models
         public string Name { get; set; }
         public Guid ImageFolderId { get; set; }
         public virtual ImageFolder ImageFolder { get; set; }
+        public Guid? UserId { get; set; }
+        public virtual User User { get; set; }
     }
 }

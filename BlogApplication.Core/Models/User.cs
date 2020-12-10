@@ -11,7 +11,6 @@ namespace BlogApplication.Core.Models
             Id = Guid.NewGuid();
             Categories = new List<Category>();
             BlogPosts = new List<BlogPost>();
-            Comments = new List<Comment>();
             CreationTime = DateTime.UtcNow;
             ModificationTime = DateTime.UtcNow;
         }
@@ -27,7 +26,6 @@ namespace BlogApplication.Core.Models
         public string Token { get; set; }
         public ICollection<BlogPost> BlogPosts { get; set; }
         public ICollection<Category> Categories { get; set; }
-        public ICollection<Comment> Comments { get; set; }
         public ICollection<ImageFolder> ImageFolders { get; set; }
     }
 }
