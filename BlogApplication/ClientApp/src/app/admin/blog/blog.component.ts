@@ -1,6 +1,6 @@
 import { BlogPostService } from './blog.service';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DataTableViewAdapter } from 'src/app/helpers/DataTableViewAdapter';
 import { AlertDialog, BlogPost, DataTable } from 'src/app/models';
 import { PostDialogComponent } from './post-dialog/post-dialog.component';

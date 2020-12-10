@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PipeModule } from './pipes/pipe.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PipeModule } from './pipes/pipe.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    PipeModule
+    PipeModule,
+    ToastrModule.forRoot()
   ],
   providers: [
   ],

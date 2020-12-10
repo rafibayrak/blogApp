@@ -3,6 +3,7 @@ import { BlogPost } from './blogPost';
 import { BlogPostCreate } from './blogPost.create';
 import { Category } from './category';
 import { DataTable } from './dataTable';
+import { ImageAndFolder } from './imageFolder';
 import { Login } from './login';
 import { User } from './user';
 import { UserCreate } from './user.create';
@@ -17,5 +18,6 @@ export {
   BlogPostCreate,
   BlogPost,
   AlertDialog,
-  User
+  User,
+  ImageAndFolder
 }

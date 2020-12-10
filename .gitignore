@@ -277,3 +277,4 @@ testem.log
 .DS_Store
 Thumbs.db
 .wwwroot/
+BlogApplication/wwwroot/
