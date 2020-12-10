@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogApplication.Data.Migrations
 {
     [DbContext(typeof(BlogDataContext))]
-    [Migration("20201208191423_AddImage")]
-    partial class AddImage
+    [Migration("20201210183436_AddImages")]
+    partial class AddImages
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -109,7 +109,7 @@ namespace BlogApplication.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("BlogPostId")
+                    b.Property<Guid>("BlogPostId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreationTime")
@@ -127,7 +127,7 @@ namespace BlogApplication.Data.Migrations
                     b.Property<Guid?>("ParentCommentId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -254,19 +254,19 @@ namespace BlogApplication.Data.Migrations
 
             modelBuilder.Entity("BlogApplication.Core.Models.Comment", b =>
                 {
-                    b.HasOne("BlogApplication.Core.Models.BlogPost", null)
+                    b.HasOne("BlogApplication.Core.Models.BlogPost", "BlogPost")
                         .WithMany("Comments")
-                        .HasForeignKey("BlogPostId");
+                        .HasForeignKey("BlogPostId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("BlogApplication.Core.Models.Comment", "ParentComment")
                         .WithMany()
                         .HasForeignKey("ParentCommentId");
 
                     b.HasOne("BlogApplication.Core.Models.User", "User")
-                        .WithMany("Comments")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("BlogApplication.Core.Models.Image", b =>
@@ -277,8 +277,8 @@ namespace BlogApplication.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BlogApplication.Core.Models.User", null)
-                        .WithMany("Images")
+                    b.HasOne("BlogApplication.Core.Models.User", "User")
+                        .WithMany()
                         .HasForeignKey("UserId");
                 });
 
