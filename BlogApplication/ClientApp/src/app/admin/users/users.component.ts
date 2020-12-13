@@ -2,7 +2,7 @@ import { UserService } from './users.service';
 import { Component, OnInit } from '@angular/core';
 import { DataTableViewAdapter } from 'src/app/helpers/DataTableViewAdapter';
 import { AlertDialog, DataTable, User } from 'src/app/models';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { AlertDialogComponent } from '../AlertDialog/AlertDialog.component';
 

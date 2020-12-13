@@ -1,0 +1,41 @@
+<div class="d-flex flex-column bd-highlight mb-3">
+  <div class="bd-highlight">
+    <div class="d-flex bd-highlight">
+      <div class="flex-grow-1 bd-highlight mr-2">
+        <mat-form-field>
+          <input matInput [(ngModel)]="dataTable.filter" (keyup)="applyFilter(dataTable)" placeholder="Filter" #input>
+          <mat-icon style="font-size: 20px; width: 20px; height: 20px;" matPrefix>search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="bd-highlight"><button color="accent" class="float-right mr-2" mat-raised-button
+          (click)="onCreateImage()">Image Ekle</button></div>
+    </div>
+  </div>
+  <div class="bd-highlight">
+    <mat-grid-list cols="5" rowHeight="4:3" style="min-width:600px;">
+      <mat-grid-tile *ngFor="let image of dataTable.dataSource" matTooltip="Name: {{image.name}}">
+        <div class="d-flex flex-column bd-highlight">
+          <div class="bd-highlight" (contextmenu)="onRightClick($event, image.id)">
+            <img style="width: 200px; height: 200px;" src="/App_Data/{{folderId}}/{{image.name}}" />
+          </div>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-paginator [length]="dataTable.lenght" (page)="paginatorChange($event,dataTable)"
+      [pageIndex]="dataTable.pageIndex" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+  </div>
+</div>
+
+<!-- an hidden div is created to set the position of appearance of the menu-->
+<div style="visibility: hidden; position: fixed;" [style.left]="menuTopLeftPosition.x"
+  [style.top]="menuTopLeftPosition.y" [matMenuTriggerFor]="rightMenu"></div>
+
+<!-- standard material menu -->
+<mat-menu #rightMenu="matMenu">
+  <ng-template matMenuContent let-item="item">
+    <button mat-menu-item (click)="onDeleteFolder(item)">Sil</button>
+    <button mat-menu-item (click)="onCopyUrl(item)">Url Kopyala</button>
+  </ng-template>
+</mat-menu>

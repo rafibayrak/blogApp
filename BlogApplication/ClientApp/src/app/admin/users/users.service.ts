@@ -12,12 +12,12 @@ export class UserService extends ControllerService {
     super('Users', httpClient);
   }
 
-  getAll(datatTable: DataTable) {
+  getAll(dataTable: DataTable) {
     let httpParams = new HttpParams();
-    httpParams = httpParams.set('filter', datatTable.filter);
-    httpParams = httpParams.append('orderby', datatTable.orderBy);
-    httpParams = httpParams.append('pageSize', datatTable.pageSize.toString());
-    httpParams = httpParams.append('pageIndex', datatTable.pageIndex.toString());
+    httpParams = httpParams.set('filter', dataTable.filter);
+    httpParams = httpParams.append('orderby', dataTable.orderBy);
+    httpParams = httpParams.append('pageSize', dataTable.pageSize.toString());
+    httpParams = httpParams.append('pageIndex', dataTable.pageIndex.toString());
     return this.get('', httpParams);
   }
 

@@ -1,4 +1,5 @@
-import { PageEvent, Sort } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { Observable } from 'rxjs';
 import { DataTable } from '../models/dataTable';
 

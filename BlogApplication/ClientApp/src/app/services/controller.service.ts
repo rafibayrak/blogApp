@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -47,7 +46,6 @@ export class ControllerService {
     }
 
     return response.pipe(catchError(this.handleError()));
-
   }
 
   protected get(action: string, httpParams?: HttpParams) {

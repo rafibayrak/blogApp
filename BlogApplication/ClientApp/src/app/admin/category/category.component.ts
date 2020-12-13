@@ -1,6 +1,6 @@
 import { AlertDialogComponent } from './../AlertDialog/AlertDialog.component';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { DataTableViewAdapter } from 'src/app/helpers/DataTableViewAdapter';
 import { AlertDialog, Category } from 'src/app/models';
 import { DataTable } from 'src/app/models/dataTable';

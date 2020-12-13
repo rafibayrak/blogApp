@@ -1,20 +1,15 @@
-import { Category } from './../../models/';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ControllerService } from './../../services/controller.service';
 import { Injectable } from '@angular/core';
-import { DataTable } from 'src/app/models/dataTable';
+import { DataTable, ImageAndFolder } from 'src/app/models';
 
 @Injectable()
-export class CategoryService extends ControllerService {
+export class ImageService extends ControllerService {
   constructor(http: HttpClient) {
-    super('Categories', http);
+    super('Images', http);
   }
 
-  getAll() {
-    return this.get('/notFilter', null);
-  }
-
-  getAllCategories(dataTable: DataTable) {
+  getFolders(dataTable: DataTable) {
     let httpParams = new HttpParams();
     httpParams = httpParams.set('filter', dataTable.filter);
     httpParams = httpParams.append('orderby', dataTable.orderBy);
@@ -23,15 +18,16 @@ export class CategoryService extends ControllerService {
     return this.get('', httpParams);
   }
 
-  saveCategory(category: Category) {
-    return this.post('', category, null);
+  saveImageFolder(imageFolder: ImageAndFolder) {
+    return this.post('/saveFolder', imageFolder)
   }
 
-  updateCategory(category: Category) {
-    return this.put(`/${category.id}`, category);
+  updateImageFolder(imageFolder: ImageAndFolder) {
+    return this.put(`/${imageFolder.id}/updateFolder`, imageFolder);
   }
 
-  removeCategory(categoryId: string) {
-    return this.delete(`/${categoryId}`);
+  removeImageFolder(id: string) {
+    return this.delete(`/${id}/removeFolder`);
   }
 }
+
