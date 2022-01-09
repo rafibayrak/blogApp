@@ -80,7 +80,7 @@ namespace BlogApplication.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Remove(Guid id)
         {
-            if (id != null || id != Guid.Empty)
+            if (id == null || id == Guid.Empty)
             {
                 return BadRequest();
             }
