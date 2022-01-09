@@ -3,12 +3,8 @@ using BlogApplication.Core.Models;
 using BlogApplication.DataContact;
 using BlogApplication.Helper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace BlogApplication.Controllers
@@ -44,6 +40,13 @@ namespace BlogApplication.Controllers
             user.Token = token;
             _service.Update(user);
             return Ok(token);
+        }
+
+        [HttpGet("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            HttpContext.Session.Clear();
+            return NoContent();
         }
     }
 }

@@ -4,6 +4,7 @@ using BlogApplication.Core.Models;
 using BlogApplication.DataContact;
 using BlogApplication.Extensions;
 using BlogApplication.Helper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -148,7 +149,7 @@ namespace BlogApplication.Controllers
         [HttpDelete("{id}/removeFolder")]
         public async Task<IActionResult> Remove(Guid id)
         {
-            var imageFolder = (ImageFolder)_service.IncludeWithWhere<ImageFolder, ICollection<Image>>(x => x.Images, x => x.Id == id);
+            var imageFolder = _service.IncludeWithWhere<ImageFolder, ICollection<Image>>(x => x.Images, x => x.Id == id)?.FirstOrDefault();
             if (imageFolder == null)
             {
                 return NotFound();
